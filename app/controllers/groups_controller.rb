@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
   before_action :authenticate_user! , only: [:new, :create, :edit, :destroy, :update]
-  before_action :find_group_and_check_permission, only: {:edit, :update, :destroy}
+  before_action :find_group_and_check_permission, only: [:edit, :update, :destroy]
 
   def index
     @groups = Group.all
@@ -51,7 +51,6 @@ class GroupsController < ApplicationController
       if current_user != @group.user
         redirect_to root_path, alert: "You have no permission"
       end
-
     end
 
     def group_params
